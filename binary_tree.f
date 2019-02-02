@@ -74,6 +74,7 @@ c       finally assign node value and return
 
 c        ===== printTree =====
 c       prints a binary tree in numerical order of indices in array
+c       prints "null nodes" (nodes with 1001 as their key) as well
 c       primarily used in debugging
 
         SUBROUTINE printTree(numNodes)
@@ -159,7 +160,7 @@ c       tree. returns 1 if a key was not found, 0 if it was found
         IF (int_tree(node) .EQ. key) GOTO 11
         IF (int_tree(node) .EQ. 1001) GOTO 12
         
-        IF (key .GT. int_tree(node)) GOTO 15
+        IF (key .GE. int_tree(node)) GOTO 15
 15      keyFind = keyFindHlpr(2*node+1,key)
         GOTO 13
         IF (key .LT. int_tree(node)) GOTO 16

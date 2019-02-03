@@ -132,8 +132,8 @@ c        WRITE(*,*) "probeCount?"
         do 90 num = 1,probeCount
                 READ(*,*) query
                 found = keyFind(1, query)
-                IF (found .EQ. 1) WRITE(*,*) query, " no"
-                IF (found .EQ. 0) WRITE(*,*) query, " yes"
+                IF (found .EQ. 1001) WRITE(*,*) query, " no"
+                IF (found .EQ. query) WRITE(*,*) query, " yes"
 90      CONTINUE
         END
 
@@ -153,23 +153,21 @@ c       determines whether or not a key is present in the binary
 c       tree. returns 1 if a key was not found, 0 if it was found
 
         INTEGER FUNCTION keyFind(node, key)
-        INTEGER node, key
+        INTEGER node, key, current
         DIMENSION int_tree(1000)
         COMMON int_tree
 
-        IF (int_tree(node) .EQ. key) GOTO 11
-        IF (int_tree(node) .EQ. 1001) GOTO 12
-        
-        IF (key .GE. int_tree(node)) GOTO 15
-15      keyFind = keyFindHlpr(2*node+1,key)
-        GOTO 13
-        IF (key .LT. int_tree(node)) GOTO 16
-16      keyFind = keyFindHlpr(2*node,key)
-        GOTO 13
+        current = int_tree(node)
+        IF (current .EQ. key) GOTO 11
+        IF (current .EQ. 1001) GOTO 11
 
-11      keyFind = 0
+        IF (key .LT. current) GOTO 16
+16      keyFind = keyFindHlpr(2*node, key)
+        IF (key .LT. current) GOTO 13
+        IF (key .GE. current) GOTO 15
+15      keyFind = keyFindHlpr(2*node+1, key)
         GOTO 13
-12      keyFind = 1
+11      keyFind = current
 13      RETURN
         END
 

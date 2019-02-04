@@ -13,6 +13,7 @@ C        get input from user
 c        WRITE(*,*) 'Number of nodes? '
         READ(*,*) nodeCount 
         IF (nodeCount .EQ. 0) GOTO 55
+        IF (nodeCount .GT. 225) GOTO 56
 c       construct the tree
         CALL constructTree(nodeCount)
 c       print the tree in preorder
@@ -20,6 +21,7 @@ c       print the tree in preorder
 c       allow user to input queries
         CALL isPresent
 55      IF (nodeCount .EQ. 0) WRITE(*,*) "Empty tree"
+56      IF (nodeCount .GT. 225) WRITE(*,*) "Tree too large"
         END
 
 C       ===== constructTree =====

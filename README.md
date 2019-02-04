@@ -58,3 +58,7 @@ Large left branch and large right branch data were meant to demonstrate the prog
 
 ##Limitations
 This program will not work for node counts over 225.
+
+##Acknowledgements
+My idea to assign indices of the array as described in "Organization" came from this web page:
+https://www.geeksforgeeks.org/binary-tree-array-implementation/
